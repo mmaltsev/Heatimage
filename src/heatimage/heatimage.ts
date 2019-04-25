@@ -4,16 +4,18 @@ import { applyStyles, canvasWrapperStyle, menuExpandedInnerHTML,
   menuExpandedStyle, menuInnerHTML, menuStyle } from './interface'
 import { HeatOptions, ColorGradients } from './types'
 
-
+// Global variables.
 let isDraw: boolean, heat, canceled: number[][], canceledMoves: number[],
   value: number, canvas: HTMLCanvasElement
 let data: number[][] = []
 let lastMoves: number[] = []
 
 export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
+  // Catching missing of image reference.
   if (img) {
     let { heatValue, colorGradient, heatRadius, heatBlur, exporting, edit, keys} = heatOptions
     value = heatValue
+    // Waiting for image to load, checking every 0.1 sec.
     let interval = setInterval(() => {
       if (img.complete) {
         clearInterval(interval)
@@ -37,6 +39,7 @@ export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
 function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradients,
   heatRadius: number, heatBlur: number, exporting: boolean, edit: boolean) {
   let canvasWrapper = generateCanvas(img, edit)
+  // Initializing simpleheat object.
   heat = simpleheat(canvas, colorGradient)
   heat.radius(heatRadius, heatBlur)
   if (exporting) {
@@ -80,13 +83,13 @@ function menuOutline(img: HTMLImageElement, canvasWrapper: HTMLDivElement) {
   })
 }
 
-// Event Listeners
+// Event Listeners.
 function mouseDown(event) {
   let x = event.clientX
   let y = event.clientY
-  // left click on canvas
+  // Left click on canvas.
   if (isInRange(x,y) && event.button === 0) {
-    // possible right click while left mouse button down
+    // Possible right click while left mouse button down.
     isDraw = !isDraw
     lastMoves.push(0)
     canceled = []
@@ -133,7 +136,7 @@ function keyPress(e) {
   }
 }
 
-// Helpers   
+// Helpers.
 function isInRange(x: number, y: number) {
   return x <= canvas.width && y <= canvas.height
 }
