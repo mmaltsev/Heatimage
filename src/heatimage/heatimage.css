@@ -1,0 +1,35 @@
+.canvas-wrapper {
+  display: block;
+  position: relative;
+}
+
+.heatimage-menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  cursor: pointer;
+  background: rgb(255, 255, 255);
+  border: 2px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+.heatimage-menu-expanded {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgb(255, 255, 255);
+  border: 2px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+  display: none;
+}
+
+.heatimage-menu-element {
+  display: block;
+  cursor: pointer;
+  padding: 7px;
+}
+
+.heatimage-menu-element:hover {
+  background-color: #f0f0f0;
+}

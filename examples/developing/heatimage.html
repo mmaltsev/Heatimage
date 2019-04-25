@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>Heat Image</title>
+    <link rel="stylesheet" type="text/css" href="heatimage.css">
+  </head>
+  <body>
+    <div class="upload-button">
+      <label for="file-upload" class="custom-file-upload">Upload Image</label>
+      <input id="file-upload" type="file" onchange="load()" accept=".png,.jpg,.jpeg,.gif,.svg,.bmp" />
+    </div>
+    <img id="base" />
+    <canvas id="canvas"></canvas>
+    <div class="menu">
+      <div class="menu-element">
+        <button class="save" onclick="saveAsPng()">save as PNG</button>
+        <button class="save" onclick="saveAsJson()">save as JSON</button>
+      </div>
+      <div class="menu-element">
+        <button class="clean" onclick="clearHeat()">clear heat</button>
+        <button class="clean" onclick="clearContent()">clear all</button>
+      </div>
+    </div>
+    <span class="helper">
+      <b>Press</b> a mouse button to start drawing
+      <br><b>Release</b> a mouse button to stop drawing
+      <br><b>Ctrl-Z</b> to undo
+      <br><b>Ctrl-Y</b> to redo
+      <br>------------------
+      <br><b>Heat radius:</b> <span id="heatRadius"></span>
+      <br><b>Color Gradient:</b> <span id="colorGradient"></span>
+    </span>
+    
+    <script src="main.js"></script>
+    <script src="heatimage.js"></script>
+    <script src="simpleheat.js"></script>
+  </body>
+</html>

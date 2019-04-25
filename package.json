@@ -1,0 +1,83 @@
+{
+  "name": "heatimage",
+  "version": "0.1.0",
+  "description": "**A library for drawing heatmap over images.**",
+  "main": "dist/bundle.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "karma start",
+    "watch:test": "npm run test -- --auto-watch --no-single-run",
+    "dev": "webpack-dev-server --config webpack/dev.config.js --hot",
+    "build": "ENV=production webpack --config webpack/prod.config.js",
+    "build:prod_warn": "ENV=prod_warn webpack --config webpack/prod.config.js",
+    "typedoc": "typedoc --out docs --exclude '**/*.spec.ts' ./src/",
+    "precommit": "lint-staged",
+    "fix-all-ts": "prettier --write src/**/*.ts && tslint --fix -c ./tslint.json 'src/**/*.ts'"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.ts": [
+      "prettier --write",
+      "tslint --fix -c ./tslint.json 'src/**/*.ts'",
+      "git add"
+    ]
+  },
+  "author": "“Maxim Maltsev” <“maltsevmn@ya.ru”>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jasmine": "^2.5.46",
+    "@types/node": "^7.0.5",
+    "@types/source-map": "^0.5.0",
+    "@types/webpack": "^2.2.7",
+    "awesome-typescript-loader": "^3.0.8",
+    "css-loader": "^0.28.0",
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^15.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-react": "^7.0.1",
+    "extract-text-webpack-plugin": "^2.0.0",
+    "husky": "^0.14.3",
+    "istanbul-instrumenter-loader": "^2.0.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.5.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.2",
+    "karma-jasmine": "^1.1.0",
+    "karma-mocha-reporter": "^2.2.3",
+    "karma-remap-coverage": "^0.1.4",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-typescript": "^3.0.0",
+    "karma-webpack": "^2.0.3",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.11.1",
+    "source-map-loader": "^0.2.0",
+    "tslint": "^5.1.0",
+    "tslint-microsoft-contrib": "^5.0.0",
+    "tsutils": "^1.6.0",
+    "typedoc": "^0.14.2",
+    "typedoc-webpack-plugin": "^1.1.4",
+    "typescript": "^2.2.1",
+    "uglify-js": "^2.8.23",
+    "uglifyjs-webpack-plugin": "^0.4.3",
+    "webpack": "^2.3.0",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^2.4.1",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {},
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmaltsev/heatimage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mmaltsev/heatimage/issues"
+  },
+  "homepage": "https://github.com/mmaltsev/heatimage#readme"
+}
