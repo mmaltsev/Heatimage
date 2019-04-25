@@ -12,7 +12,7 @@ module.exports = function() {
     output: {
       path: helpers.root('dist'),
       filename: 'bundle.js',
-      library: 'HeatImage',
+      library: 'Heatimage',
       libraryTarget: 'umd2',
     },
     module: {

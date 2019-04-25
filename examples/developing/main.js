@@ -10,4 +10,4 @@ let heatOptions = {
   keys: false
 }
 
-HeatImage.heatimage(element, heatOptions)
+Heatimage.heatimage(element, heatOptions)

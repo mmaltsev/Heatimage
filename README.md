@@ -1,4 +1,4 @@
-# Heat Image
+# Heatimage
 
 **A library for drawing heatmaps over images.**
 
