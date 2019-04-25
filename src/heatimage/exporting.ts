@@ -1,12 +1,14 @@
-export function saveAsJSON(data) {
-  let jsonData = []
+import { JSONData } from './types'
+
+export function saveAsJSON(data: number[][]) {
+  let jsonData: JSONData[] = []
   for (let element of data) {
     jsonData.push({ x: element[0], y: element[1], value: element[2] })
   }
-  download(jsonData, 'heatpath.json', 'application/json');
+  download(jsonData, 'heatpath.json', 'application/json')
 }
 
-function download(data, fileName, contentType) {
+function download(data: JSONData[], fileName: string, contentType: string) {
   let txtData = JSON.stringify(data)
   let a = document.createElement('a')
   a.id = 'downloadJSON'
@@ -16,7 +18,7 @@ function download(data, fileName, contentType) {
   a.click()
 }
 
-export function saveAsPNG(img, canvas) {
+export function saveAsPNG(img: HTMLImageElement, canvas: HTMLCanvasElement) {
   if (canvas.width > 0) {
     let heatCanvas = document.createElement('canvas')
     heatCanvas.width = img.width
@@ -30,6 +32,6 @@ export function saveAsPNG(img, canvas) {
     a.download = 'heat_image.png'
     a.click()
   } else {
-    console.log('Nothing to save!')
+    alert('Nothing to save!')
   }
 }
