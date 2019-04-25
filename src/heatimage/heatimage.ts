@@ -1,16 +1,17 @@
 import * as simpleheat from './simpleheat.js'
 import { saveAsJSON, saveAsPNG } from './exporting'
-import { canvasWrapperStyle, menuStyle, menuExpandedStyle, menuExpandedInnerHTML, menuInnerHTML } from './styles'
+import { applyStyles, canvasWrapperStyle, menuExpandedInnerHTML,
+  menuExpandedStyle, menuInnerHTML, menuStyle } from './interface'
 
-let isDraw, heat, canceled, canceledMoves, value, canvas: HTMLCanvasElement
-let data = []
-let lastMoves = []
+
+let isDraw: boolean, heat, canceled: number[][], canceledMoves: number[],
+value: number, canvas: HTMLCanvasElement
+let data: number[][] = []
+let lastMoves: number[] = []
 
 export function heatimage(img: HTMLImageElement, heatOptions) {
   let { heatValue, colorGradient, heatRadius, heatBlur, exporting, edit, keys} = heatOptions
-  console.log(heatOptions)
   value = heatValue
-  img.style.userSelect = 'none'
   let interval = setInterval(() => {
     if (img.complete) {
       clearInterval(interval)
@@ -29,6 +30,15 @@ export function heatimage(img: HTMLImageElement, heatOptions) {
 }
 
 function onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit) {
+  let canvasWrapper = generateCanvas(img, edit)
+  heat = simpleheat(canvas, colorGradient)
+  heat.radius(heatRadius, heatBlur)
+  if (exporting) {
+    menuOutline(img, canvasWrapper)
+  }
+}
+
+function generateCanvas(img, edit) {
   let canvasWrapper: HTMLDivElement = document.createElement('div')
   canvas = document.createElement('canvas')
   canvasWrapper.appendChild(canvas)
@@ -37,29 +47,31 @@ function onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit) 
   canvas.width = img.width
   canvas.height = img.height
   edit ? canvas.style.cursor = 'crosshair' : 'default'
-  heat = simpleheat(canvas, colorGradient)
-  heat.radius(heatRadius, heatBlur)
-  
-  if (exporting) {
-    let menu = document.createElement('div')
-    let menuExpanded = document.createElement('div')
-    canvasWrapper.appendChild(menu)
-    canvasWrapper.appendChild(menuExpanded)
-    menu.innerHTML = menuInnerHTML
-    menuExpanded.innerHTML = menuExpandedInnerHTML
-    applyStyles(menu, menuStyle)
-    applyStyles(menuExpanded, menuExpandedStyle)
-    document.querySelector('#heatimageSaveAsJSON').addEventListener('click', () => saveAsJSON(data))
-    document.querySelector('#heatimageSaveAsPNG').addEventListener('click', () => saveAsPNG(img, canvas))
-    menu.addEventListener('mouseover', () => {
-      menu.style.background = 'rgb(247, 247, 247)'
-      menuExpanded.style.display = 'initial'
-    })
-    menuExpanded.addEventListener('mouseleave', () => {
-      menu.style.background = 'rgb(255, 255, 255)'
-      menuExpanded.style.display = 'none'
-    })
-  }
+  img.style.userSelect = 'none'
+  return canvasWrapper
+}
+
+function menuOutline(img, canvasWrapper) {
+  let menu = document.createElement('div')
+  let menuExpanded = document.createElement('div')
+  canvasWrapper.appendChild(menu)
+  canvasWrapper.appendChild(menuExpanded)
+  menu.innerHTML = menuInnerHTML
+  menuExpanded.innerHTML = menuExpandedInnerHTML
+  applyStyles(menu, menuStyle)
+  applyStyles(menuExpanded, menuExpandedStyle)
+  document.querySelector('#heatimageSaveAsJSON')
+    .addEventListener('click', () => saveAsJSON(data))
+  document.querySelector('#heatimageSaveAsPNG')
+    .addEventListener('click', () => saveAsPNG(img, canvas))
+  menu.addEventListener('mouseover', () => {
+    menu.style.background = 'rgb(247, 247, 247)'
+    menuExpanded.style.display = 'initial'
+  })
+  menuExpanded.addEventListener('mouseleave', () => {
+    menu.style.background = 'rgb(255, 255, 255)'
+    menuExpanded.style.display = 'none'
+  })
 }
 
 // Event Listeners
@@ -73,14 +85,6 @@ function mouseDown(event) {
     lastMoves.push(0)
     canceled = []
     canceledMoves = []
-  }
-}
-
-function applyStyles(element, styles) {
-  for (let attr in styles) {
-    if (styles.hasOwnProperty(attr)) {
-      element.style[attr] = styles[attr]
-    }
   }
 }
 
@@ -101,6 +105,7 @@ function mouseMove(event) {
 }
 
 function keyPress(e) {
+  console.log(canceled, canceledMoves)
   let evtobj = window.event ? event : e
   if (evtobj.keyCode == 90 && evtobj.ctrlKey && lastMoves.length > 0) {
     if (isDraw) isDraw = !isDraw
