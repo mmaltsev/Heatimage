@@ -2,6 +2,7 @@ import * as simpleheat from './simpleheat.js'
 import { saveAsJSON, saveAsPNG } from './exporting'
 import { applyStyles, canvasWrapperStyle, menuExpandedInnerHTML,
   menuExpandedStyle, menuInnerHTML, menuStyle } from './interface'
+import { HeatOptions, ColorGradients } from './types'
 
 
 let isDraw: boolean, heat, canceled: number[][], canceledMoves: number[],
@@ -9,7 +10,7 @@ value: number, canvas: HTMLCanvasElement
 let data: number[][] = []
 let lastMoves: number[] = []
 
-export function heatimage(img: HTMLImageElement, heatOptions) {
+export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
   let { heatValue, colorGradient, heatRadius, heatBlur, exporting, edit, keys} = heatOptions
   value = heatValue
   let interval = setInterval(() => {
@@ -29,7 +30,8 @@ export function heatimage(img: HTMLImageElement, heatOptions) {
   }
 }
 
-function onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit) {
+function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradients,
+  heatRadius: number, heatBlur: number, exporting: boolean, edit: boolean) {
   let canvasWrapper = generateCanvas(img, edit)
   heat = simpleheat(canvas, colorGradient)
   heat.radius(heatRadius, heatBlur)
@@ -38,7 +40,7 @@ function onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit) 
   }
 }
 
-function generateCanvas(img, edit) {
+function generateCanvas(img: HTMLImageElement, edit: boolean) {
   let canvasWrapper: HTMLDivElement = document.createElement('div')
   canvas = document.createElement('canvas')
   canvasWrapper.appendChild(canvas)
@@ -51,7 +53,7 @@ function generateCanvas(img, edit) {
   return canvasWrapper
 }
 
-function menuOutline(img, canvasWrapper) {
+function menuOutline(img: HTMLImageElement, canvasWrapper: HTMLDivElement) {
   let menu = document.createElement('div')
   let menuExpanded = document.createElement('div')
   canvasWrapper.appendChild(menu)
@@ -129,6 +131,6 @@ function keyPress(e) {
 }
 
 // Helpers   
-function isInRange(x, y) {
+function isInRange(x: number, y: number) {
   return x <= canvas.width && y <= canvas.height
 }
