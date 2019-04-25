@@ -1,2 +1,2 @@
-export declare function saveAsJSON(data: any): void;
-export declare function saveAsPNG(img: any, canvas: any): void;
+export declare function saveAsJSON(data: number[][]): void;
+export declare function saveAsPNG(img: HTMLImageElement, canvas: HTMLCanvasElement): void;
