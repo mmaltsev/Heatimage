@@ -11,3 +11,9 @@ export interface HeatOptions {
 export type ColorGradients = 'Black Aqua White' | 'Blue Red' | 'Dark Green' | 'Deep Sea' |
   'Color Spectrum' | 'Incandescent' | 'Heated Metal' | 'Sunrise' | 'Stepped Colors' |
   'Visible Spectrum'
+
+export interface JSONData {
+  x: number
+  y: number
+  value: number
+}
