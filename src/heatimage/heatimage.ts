@@ -6,27 +6,31 @@ import { HeatOptions, ColorGradients } from './types'
 
 
 let isDraw: boolean, heat, canceled: number[][], canceledMoves: number[],
-value: number, canvas: HTMLCanvasElement
+  value: number, canvas: HTMLCanvasElement
 let data: number[][] = []
 let lastMoves: number[] = []
 
 export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
-  let { heatValue, colorGradient, heatRadius, heatBlur, exporting, edit, keys} = heatOptions
-  value = heatValue
-  let interval = setInterval(() => {
-    if (img.complete) {
-      clearInterval(interval)
-      onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit)
-    }
-  }, 100)
+  if (img) {
+    let { heatValue, colorGradient, heatRadius, heatBlur, exporting, edit, keys} = heatOptions
+    value = heatValue
+    let interval = setInterval(() => {
+      if (img.complete) {
+        clearInterval(interval)
+        onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit)
+      }
+    }, 100)
 
-  if (edit) {
-    document.addEventListener('mousedown', mouseDown)
-    document.addEventListener('mouseup', mouseUp)
-    document.addEventListener('mousemove', mouseMove)
-    if (keys) {
-      document.onkeydown = keyPress
+    if (edit) {
+      document.addEventListener('mousedown', mouseDown)
+      document.addEventListener('mouseup', mouseUp)
+      document.addEventListener('mousemove', mouseMove)
+      if (keys) {
+        document.onkeydown = keyPress
+      }
     }
+  } else {
+    console.error('Heatimage Error: No image specified')
   }
 }
 
@@ -107,7 +111,6 @@ function mouseMove(event) {
 }
 
 function keyPress(e) {
-  console.log(canceled, canceledMoves)
   let evtobj = window.event ? event : e
   if (evtobj.keyCode == 90 && evtobj.ctrlKey && lastMoves.length > 0) {
     if (isDraw) isDraw = !isDraw
