@@ -1,6 +1,6 @@
 # Heatimage
 
-**A library for overlaying heatmaps on images.**
+**A library for overlaying heat on static images.**
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
@@ -17,7 +17,7 @@ npm install heatimage
 Or to add manually a link to the library into your html file:
 
 ```html
-<script src="https://unpkg.com/heatmap@latest/dist/bundle.js"></script>
+<script src="https://unpkg.com/heatimage@latest/dist/bundle.js"></script>
 ```
 
 ## Usage
