@@ -1,12 +1,16 @@
-import * as simpleheat from './simpleheat.js'
 import { saveAsJSON, saveAsPNG } from './exporting'
 import { applyStyles, canvasWrapperStyle, menuExpandedInnerHTML,
   menuExpandedStyle, menuInnerHTML, menuStyle } from './interface'
-import { HeatOptions, ColorGradients } from './types'
+import * as simpleheat from './simpleheat.js'
+import { ColorGradients, HeatOptions } from './types'
 
 // Global variables.
-let isDraw: boolean, heat, canceled: number[][], canceledMoves: number[],
-  value: number, canvas: HTMLCanvasElement
+let isDraw: boolean
+let heat
+let canceled: number[][]
+let canceledMoves: number[]
+let value: number
+let canvas: HTMLCanvasElement
 let data: number[][] = []
 let lastMoves: number[] = []
 
@@ -55,7 +59,7 @@ function generateCanvas(img: HTMLImageElement, edit: boolean) {
   applyStyles(canvasWrapper, canvasWrapperStyle(img))
   canvas.width = img.width
   canvas.height = img.height
-  edit ? canvas.style.cursor = 'crosshair' : 'default'
+  canvas.style.cursor = edit ? 'crosshair' : 'default'
   img.style.userSelect = 'none'
   return canvasWrapper
 }
@@ -115,8 +119,8 @@ function mouseMove(event) {
 
 function keyPress(e) {
   let evtobj = window.event ? event : e
-  if (evtobj.keyCode == 90 && evtobj.ctrlKey && lastMoves.length > 0) {
-    if (isDraw) isDraw = !isDraw
+  if (evtobj.ctrlKey && evtobj.keyCode === 90 && lastMoves.length > 0) {
+    isDraw = false
     let lastMovesNum = lastMoves.pop()
     canceledMoves.push(lastMovesNum)
     for (let i = 0; i < lastMovesNum; i++) {
@@ -124,8 +128,8 @@ function keyPress(e) {
     }
     heat.data(data)
     heat.draw()
-  } else if (evtobj.keyCode == 89 && evtobj.ctrlKey && canceledMoves.length > 0) {
-    if (isDraw) isDraw = !isDraw
+  } else if (evtobj.ctrlKey && evtobj.keyCode === 89  && canceledMoves.length > 0) {
+    isDraw = false
     let canceledMovesNum = canceledMoves.pop()
     lastMoves.push(canceledMovesNum)
     for (let i = 0; i < canceledMovesNum; i++) {
