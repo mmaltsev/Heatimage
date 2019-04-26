@@ -184,7 +184,7 @@ simpleheat.prototype = {
         ctx.fillRect(0, 0, 1, 256);
 
         this._grad = ctx.getImageData(0, 0, 1, 256).data;
-
+        
         return this;
     },
 
