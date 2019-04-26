@@ -1,6 +1,6 @@
 # Heatimage
 
-**A library for drawing heatmaps over images.**
+**A library for overlaying heatmaps on images.**
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
@@ -11,30 +11,42 @@
 The easiest way to get started is to install it via npm:
 
 ```
+npm install heatimage
 ```
 
 Or to add manually a link to the library into your html file:
 
 ```html
+<script src="https://unpkg.com/heatmap@latest/dist/bundle.js"></script>
 ```
 
 ## Usage
-
+Create an `img` element and give it an id, e.g.:
 
 ```html
+<img src="world_map.png" id="heatimage" />
 ```
 
-Just copy this code into your js / ts file or into `<script> </script>` tags in html file:
+Then, use specified id in order to select an `img` element, specify options and trigger Heatimage library in your js / ts file or `<script> </script>` tags in html file:
 
 ```javascript
+let element = document.querySelector('#heatimage')
+
+let heatOptions = {
+  heatValue: 0.05,
+  heatRadius: 15,
+  heatBlur: 25,
+  colorGradient: 'Visible Spectrum',
+  exporting: true,
+  edit: true,
+  keys: true
+}
+
+Heatimage.heatimage(element, heatOptions)
 ```
 
-
-#### Result:
-
-
-## Examples
-
+## Results:
+<img src="examples/demo/world_map_heat.png" width="550" />
 
 ## Contributing
 Build the library with `npm run build`. For a production version with console warnings, execute `npm run build:prod_warn`. This will fetch all dependencies and then compile the `dist` files. To see the examples locally you can start a web server with `npm run dev` and go to `localhost:8080` (`localhost:8081` if port `8080` is busy).
