@@ -45,7 +45,7 @@ simpleheat.prototype = {
 
     defaultRadius: 25,
 
-    defaultGradientName: 'darkGreen',
+    defaultGradientName: 'Dark Green',
 
     defaultGradients: {
         // Many of the palettes listed bellow were extracted from
