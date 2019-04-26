@@ -1,10 +1,11 @@
 # Heatimage
 
-**A library for overlaying heat on static images.**
+**A library for overlaying heat on static images.** Draw heat over static images or simply visualize existing datasets.
+
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-## [Demo]()
+## [Demo]() | [Docs]()
 
 ## Installation
 
@@ -47,6 +48,7 @@ Heatimage.heatimage(element, heatOptions)
 
 ## Results:
 <img src="examples/demo/world_map_heat.png" width="550" />
+[source image](https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Map_of_the_world_by_the_US_Gov_as_of_2016.svg/1024px-Map_of_the_world_by_the_US_Gov_as_of_2016.svg.png)
 
 ## Contributing
 Build the library with `npm run build`. For a production version with console warnings, execute `npm run build:prod_warn`. This will fetch all dependencies and then compile the `dist` files. To see the examples locally you can start a web server with `npm run dev` and go to `localhost:8080` (`localhost:8081` if port `8080` is busy).
