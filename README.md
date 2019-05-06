@@ -48,6 +48,7 @@ Heatimage.heatimage(element, heatOptions)
 
 ## Results:
 <img src="examples/demo/world_map_heat.png" width="550" />
+
 [source image](https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Map_of_the_world_by_the_US_Gov_as_of_2016.svg/1024px-Map_of_the_world_by_the_US_Gov_as_of_2016.svg.png)
 
 ## Contributing
