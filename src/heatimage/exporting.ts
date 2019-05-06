@@ -1,14 +1,14 @@
-import { JSONData } from './types'
+import { HeatData } from './types'
 
 export function saveAsJSON(data: number[][]) {
-  let jsonData: JSONData[] = []
+  let heatData: HeatData[] = []
   for (let element of data) {
-    jsonData.push({ x: element[0], y: element[1], value: element[2] })
+    heatData.push({ x: element[0], y: element[1], value: element[2] })
   }
-  download(jsonData, 'heatpath.json', 'application/json')
+  downloadJSON(heatData, 'heatpath.json', 'application/json')
 }
 
-function download(data: JSONData[], fileName: string, contentType: string) {
+function downloadJSON(data: HeatData[], fileName: string, contentType: string) {
   let txtData = JSON.stringify(data)
   let a = document.createElement('a')
   a.id = 'downloadJSON'

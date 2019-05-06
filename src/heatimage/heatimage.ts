@@ -2,7 +2,7 @@ import { saveAsJSON, saveAsPNG } from './exporting'
 import { applyStyles, canvasWrapperStyle, menuExpandedInnerHTML,
   menuExpandedStyle, menuInnerHTML, menuStyle } from './interface'
 import * as simpleheat from './simpleheat.js'
-import { ColorGradients, HeatOptions } from './types'
+import { ColorGradients, HeatData, HeatOptions } from './types'
 
 // Global variables.
 let isDraw: boolean
@@ -13,6 +13,7 @@ let value: number
 let canvas: HTMLCanvasElement
 let data: number[][] = []
 let lastMoves: number[] = []
+let heatData: HeatData[]
 
 export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
   // Catching missing of image reference.
