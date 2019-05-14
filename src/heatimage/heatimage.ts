@@ -1,12 +1,12 @@
 import { saveAsJSON, saveAsPNG } from './exporting'
 import { applyStyles, canvasWrapperStyle, menuExpandedInnerHTML,
-  menuExpandedStyle, menuInnerHTML, menuStyle } from './interface'
+  menuExpandedStyle, menuInnerHTML, menuStyle } from './outline'
 import * as simpleheat from './simpleheat.js'
-import { ColorGradients, HeatData, HeatOptions } from './types'
+import { ColorGradientNames, HeatData, HeatOptions, Simpleheat } from './types'
 
 // Global variables.
 let isDraw: boolean
-let heat
+let heat: Simpleheat
 let canceled: number[][]
 let canceledMoves: number[]
 let value: number
@@ -41,7 +41,7 @@ export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
   }
 }
 
-function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradients,
+function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradientNames,
   heatRadius: number, heatBlur: number, exporting: boolean, edit: boolean) {
   let canvasWrapper = generateCanvas(img, edit)
   // Initializing simpleheat object.
@@ -89,7 +89,7 @@ function menuOutline(img: HTMLImageElement, canvasWrapper: HTMLDivElement) {
 }
 
 // Event Listeners.
-function mouseDown(event) {
+function mouseDown(event: MouseEvent) {
   let x = event.clientX
   let y = event.clientY
   // Left click on canvas.
@@ -102,25 +102,24 @@ function mouseDown(event) {
   }
 }
 
-function mouseUp(event) {
+function mouseUp(event: MouseEvent) {
   isDraw = false
 }
 
-function mouseMove(event) {
+function mouseMove(event: MouseEvent) {
   let x = event.clientX
   let y = event.clientY
   if (isDraw && isInRange(x, y)) {
     data.push([x, y, value])
     heat.clear()
     heat.data(data)
-    heat.draw()
+    heat.draw(undefined)
     lastMoves[lastMoves.length - 1] ++
   }
 }
 
-function keyPress(e) {
-  let evtobj = window.event ? event : e
-  if (evtobj.ctrlKey && evtobj.keyCode === 90 && lastMoves.length > 0) {
+function keyPress(event: KeyboardEvent) {
+  if (event.ctrlKey && event.keyCode === 90 && lastMoves.length > 0) {
     isDraw = false
     let lastMovesNum = lastMoves.pop()
     canceledMoves.push(lastMovesNum)
@@ -128,8 +127,8 @@ function keyPress(e) {
       canceled.push(data.pop())
     }
     heat.data(data)
-    heat.draw()
-  } else if (evtobj.ctrlKey && evtobj.keyCode === 89  && canceledMoves.length > 0) {
+    heat.draw(undefined)
+  } else if (event.ctrlKey && event.keyCode === 89  && canceledMoves.length > 0) {
     isDraw = false
     let canceledMovesNum = canceledMoves.pop()
     lastMoves.push(canceledMovesNum)
@@ -137,7 +136,7 @@ function keyPress(e) {
       data.push(canceled.pop())
     }
     heat.data(data)
-    heat.draw()
+    heat.draw(undefined)
   }
 }
 
