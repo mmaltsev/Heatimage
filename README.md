@@ -42,11 +42,31 @@ let heatOptions = {
   colorGradient: 'Visible Spectrum',
   exporting: true,
   edit: true,
-  keys: true
+  keys: true,
+  defaultData: [
+    {x: 375, y: 84, value: 0.05},
+    {x: 377, y: 84, value: 0.05},
+    {x: 379, y: 88, value: 0.05}
+  ],
 }
 
 Heatimage.heatimage(element, heatOptions)
 ```
+
+## Options
+
+#### heatOptions: { ... }
+
+| Name | Values Ranges | Description |
+| ---- | ------------- | ----------- |
+| heatValue | number ⩾ 0 | value of heat point |
+| heatRadius | number ⩾ 0 | radius of heat point |
+| heatBlur | number ⩾ 0 | blur level of heat |
+| colorGradient | [name of the palette]() | coloring scheme of heat |
+| exporting | true / false | exporting menu at the top-right corner |
+| edit | true / false | enable / disable drawing |
+| keys | true / false | enable / disable using keyboard for drawing |
+| defaultData | array of `{x, y, value}` objects | set default heat data |
 
 ## Results
 <img src="examples/demo/world_map_heat.png" width="550" />
