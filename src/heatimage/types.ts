@@ -6,6 +6,7 @@ export interface HeatOptions {
   exporting: boolean
   edit: boolean
   keys: boolean
+  defaultData: HeatData[]
 }
 
 export type ColorGradientNames = 'Black Aqua White' | 'Blue Red' | 'Dark Green' | 'Deep Sea' |
@@ -44,7 +45,7 @@ export interface Simpleheat {
   radius: (r: number, blur: number) => this
   resize: () => any
   gradient: (grad: ColorGradients) => this
-  draw: (minOpacity: number) => this
+  draw: (minOpacity?: number) => this
   _colorize: (pixels: Uint8ClampedArray, gradient: Uint8ClampedArray) => any
   _createCanvas: () => HTMLCanvasElement
 }

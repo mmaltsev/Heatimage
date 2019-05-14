@@ -13,18 +13,18 @@ let value: number
 let canvas: HTMLCanvasElement
 let data: number[][] = []
 let lastMoves: number[] = []
-let heatData: HeatData[]
 
 export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
   // Catching missing of image reference.
   if (img) {
-    let { heatValue, colorGradient, heatRadius, heatBlur, exporting, edit, keys} = heatOptions
+    let { heatValue, colorGradient, heatRadius, heatBlur, exporting,
+      edit, keys, defaultData} = heatOptions
     value = heatValue
     // Waiting for image to load, checking every 0.1 sec.
     let interval = setInterval(() => {
       if (img.complete) {
         clearInterval(interval)
-        onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit)
+        onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit, defaultData)
       }
     }, 100)
 
@@ -41,12 +41,17 @@ export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
   }
 }
 
-function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradientNames,
-  heatRadius: number, heatBlur: number, exporting: boolean, edit: boolean) {
+function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradientNames, heatRadius: number,
+  heatBlur: number, exporting: boolean, edit: boolean, defaultData: HeatData[]) {
   let canvasWrapper = generateCanvas(img, edit)
   // Initializing simpleheat object.
   heat = simpleheat(canvas, colorGradient)
   heat.radius(heatRadius, heatBlur)
+  if (defaultData) {
+    data = heatDataValues(defaultData)
+    heat.data(data)
+    heat.draw()
+  }
   if (exporting) {
     menuOutline(img, canvasWrapper)
   }
@@ -113,7 +118,7 @@ function mouseMove(event: MouseEvent) {
     data.push([x, y, value])
     heat.clear()
     heat.data(data)
-    heat.draw(undefined)
+    heat.draw()
     lastMoves[lastMoves.length - 1] ++
   }
 }
@@ -127,7 +132,7 @@ function keyPress(event: KeyboardEvent) {
       canceled.push(data.pop())
     }
     heat.data(data)
-    heat.draw(undefined)
+    heat.draw()
   } else if (event.ctrlKey && event.keyCode === 89  && canceledMoves.length > 0) {
     isDraw = false
     let canceledMovesNum = canceledMoves.pop()
@@ -136,11 +141,15 @@ function keyPress(event: KeyboardEvent) {
       data.push(canceled.pop())
     }
     heat.data(data)
-    heat.draw(undefined)
+    heat.draw()
   }
 }
 
 // Helpers.
 function isInRange(x: number, y: number) {
   return x <= canvas.width && y <= canvas.height
+}
+
+function heatDataValues(defaultData: HeatData[]) {
+  return defaultData.map(el => Object.keys(el).map(key => el[key]))
 }
