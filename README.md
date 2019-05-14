@@ -1,6 +1,8 @@
 # Heatimage
 
-**A library for overlaying heat on static images.** Draw heat over static images or simply visualize existing datasets.
+**A library for overlaying heat on static images.**
+
+Draw heat over static images or simply visualize existing datasets.
 
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
@@ -46,7 +48,7 @@ let heatOptions = {
 Heatimage.heatimage(element, heatOptions)
 ```
 
-## Results:
+## Results
 <img src="examples/demo/world_map_heat.png" width="550" />
 
 [source image](https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Map_of_the_world_by_the_US_Gov_as_of_2016.svg/1024px-Map_of_the_world_by_the_US_Gov_as_of_2016.svg.png)
