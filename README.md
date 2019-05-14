@@ -7,17 +7,21 @@ Draw heat over static images or simply visualize existing datasets.
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-## [Demo]() | [Docs]()
+## [Demo](https://mmaltsev.github.io/Heatimage/examples/demo) | [Docs]()
 
 ## Installation
 
-The easiest way to get started is to install it via npm:
+The easiest way to get started is to install it via npm and improt it into your project:
 
 ```
 npm install heatimage
 ```
 
-Or to add manually a link to the library into your html file:
+```js
+import * as Heatimage from 'heatimage'
+```
+
+Or to add a direct link to the library into your html file:
 
 ```html
 <script src="https://unpkg.com/heatimage@latest/dist/bundle.js"></script>
@@ -32,7 +36,7 @@ Create an `img` element and give it an id, e.g.:
 
 Then, use specified id in order to select an `img` element, specify options and trigger Heatimage library in your js / ts file or `<script> </script>` tags in html file:
 
-```javascript
+```js
 let element = document.querySelector('#heatimage')
 
 let heatOptions = {
@@ -62,7 +66,7 @@ Heatimage.heatimage(element, heatOptions)
 | heatValue | number ⩾ 0 | value of heat point |
 | heatRadius | number ⩾ 0 | radius of heat point |
 | heatBlur | number ⩾ 0 | blur level of heat |
-| colorGradient | [name of the palette]() | coloring scheme of heat |
+| colorGradient | [name of the palette](https://mmaltsev.github.io/Heatimage/examples/demo/gradients.html) | coloring scheme of heat |
 | exporting | true / false | exporting menu at the top-right corner |
 | edit | true / false | enable / disable drawing |
 | keys | true / false | enable / disable using keyboard for drawing |
