@@ -11,13 +11,17 @@ Draw heat over static images or simply visualize existing datasets.
 
 ## Installation
 
-The easiest way to get started is to install it via npm:
+The easiest way to get started is to install it via npm and improt it into your project:
 
 ```
 npm install heatimage
 ```
 
-Or to add manually a link to the library into your html file:
+```js
+import * as Heatimage from 'heatimage'
+```
+
+Or to add a direct link to the library into your html file:
 
 ```html
 <script src="https://unpkg.com/heatimage@latest/dist/bundle.js"></script>
@@ -32,7 +36,7 @@ Create an `img` element and give it an id, e.g.:
 
 Then, use specified id in order to select an `img` element, specify options and trigger Heatimage library in your js / ts file or `<script> </script>` tags in html file:
 
-```javascript
+```js
 let element = document.querySelector('#heatimage')
 
 let heatOptions = {
