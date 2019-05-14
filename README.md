@@ -7,7 +7,7 @@ Draw heat over static images or simply visualize existing datasets.
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-## [Demo]() | [Docs]()
+## [Demo](https://mmaltsev.github.io/Heatimage/examples/demo) | [Docs]()
 
 ## Installation
 
@@ -62,7 +62,7 @@ Heatimage.heatimage(element, heatOptions)
 | heatValue | number ⩾ 0 | value of heat point |
 | heatRadius | number ⩾ 0 | radius of heat point |
 | heatBlur | number ⩾ 0 | blur level of heat |
-| colorGradient | [name of the palette]() | coloring scheme of heat |
+| colorGradient | [name of the palette](https://mmaltsev.github.io/Heatimage/examples/demo/gradients.html) | coloring scheme of heat |
 | exporting | true / false | exporting menu at the top-right corner |
 | edit | true / false | enable / disable drawing |
 | keys | true / false | enable / disable using keyboard for drawing |
