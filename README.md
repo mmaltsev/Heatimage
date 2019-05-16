@@ -25,33 +25,36 @@ Or to add a direct link to the library into your html file:
 ```
 
 ## Usage
-Create an `img` element and give it an id, e.g.:
+Create an `img` element, give it an id and specify onload method, e.g.:
 
 ```html
-<img src="world_map.png" id="heatimage" />
+<img onload="initHeatimage()" src="world_map.png" id="heatimage" />
 ```
 
-Then, use specified id in order to select an `img` element, specify options and trigger Heatimage library in your js / ts file or `<script> </script>` tags in html file:
+Then, inside onload method use specified id in order to select an `img` element, specify options and trigger Heatimage library in your js / ts file or `<script> </script>` tags in html file:
 
 ```js
-let element = document.querySelector('#heatimage')
+function initHeatimage() {
+  let element = document.querySelector('#heatimage')
 
-let heatOptions = {
-  heatValue: 0.05,
-  heatRadius: 15,
-  heatBlur: 25,
-  colorGradient: 'Visible Spectrum',
-  exporting: true,
-  edit: true,
-  keys: true,
-  defaultData: [
-    {x: 375, y: 84, value: 0.05},
-    {x: 377, y: 84, value: 0.05},
-    {x: 379, y: 88, value: 0.05}
-  ],
+  let heatOptions = {
+    heatValue: 0.05,
+    heatRadius: 15,
+    heatBlur: 25,
+    colorGradient: 'Visible Spectrum',
+    exporting: true,
+    edit: true,
+    keys: true,
+    visibleCanvas: true,
+    defaultData: [
+      {x: 375, y: 84, value: 0.05},
+      {x: 377, y: 84, value: 0.05},
+      {x: 379, y: 88, value: 0.05}
+    ],
+  }
+
+  Heatimage.heatimage(element, heatOptions)
 }
-
-Heatimage.heatimage(element, heatOptions)
 ```
 
 ## Options
@@ -67,6 +70,7 @@ Heatimage.heatimage(element, heatOptions)
 | exporting | true / false | exporting menu at the top-right corner |
 | edit | true / false | enable / disable drawing |
 | keys | true / false | enable / disable using keyboard for drawing |
+| displayCanvas | true / false | display / hide overlay canvas |
 | defaultData | array of `{x, y, value}` objects | set default heat data |
 
 ## Results

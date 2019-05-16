@@ -6,6 +6,7 @@ export interface HeatOptions {
   exporting: boolean
   edit: boolean
   keys: boolean
+  displayCanvas: boolean
   defaultData: HeatData[]
 }
 

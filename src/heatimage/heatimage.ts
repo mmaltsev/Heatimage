@@ -18,7 +18,7 @@ export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
   // Catching missing of image reference.
   if (img) {
     let { heatValue, colorGradient, heatRadius, heatBlur, exporting,
-      edit, keys, defaultData} = heatOptions
+      edit, keys, displayCanvas, defaultData} = heatOptions
     value = heatValue
     if (edit) {
       document.addEventListener('mousedown', mouseDown)
@@ -28,7 +28,8 @@ export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
         document.onkeydown = keyPress
       }
     }
-    onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit, defaultData)
+    onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit, displayCanvas,
+      defaultData)
     return exportHeatimage(img)
   } else {
     console.error('Heatimage Error: No image specified')
@@ -50,8 +51,9 @@ function exportHeatimage(img) {
 }
 
 function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradientNames, heatRadius: number,
-  heatBlur: number, exporting: boolean, edit: boolean, defaultData: HeatData[]) {
-  let canvasWrapper = generateCanvas(img, edit)
+  heatBlur: number, exporting: boolean, edit: boolean, displayCanvas: boolean,
+  defaultData: HeatData[]) {
+  let canvasWrapper = generateCanvas(img, edit, displayCanvas)
   // Initializing simpleheat object.
   heat = simpleheat(canvas, colorGradient)
   heat.radius(heatRadius, heatBlur)
@@ -65,9 +67,10 @@ function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradientNames, h
   }
 }
 
-function generateCanvas(img: HTMLImageElement, edit: boolean) {
+function generateCanvas(img: HTMLImageElement, edit: boolean, displayCanvas: boolean) {
   let canvasWrapper: HTMLDivElement = document.createElement('div')
   canvas = document.createElement('canvas')
+  canvas.style.display = displayCanvas ? 'initial' : 'none'
   canvasWrapper.appendChild(canvas)
   img.parentNode.insertBefore(canvasWrapper, img.nextSibling)
   applyStyles(canvasWrapper, canvasWrapperStyle(img))
