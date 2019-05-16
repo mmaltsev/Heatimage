@@ -20,13 +20,7 @@ function downloadJSON(data: HeatData[], fileName: string, contentType: string) {
 
 export function saveAsPNG(img: HTMLImageElement, canvas: HTMLCanvasElement) {
   if (canvas.width > 0) {
-    let heatCanvas = document.createElement('canvas')
-    heatCanvas.width = img.width
-    heatCanvas.height = img.height
-    let heatCanvasContext = heatCanvas.getContext('2d')
-    heatCanvasContext.drawImage(img, 0, 0)
-    heatCanvasContext.drawImage(canvas, 0, 0)
-    let image = heatCanvas.toDataURL('image/png')
+    let image = canvasToPng(img, canvas)
     let a = document.createElement('a')
     a.href = image
     a.download = 'heat_image.png'
@@ -34,4 +28,15 @@ export function saveAsPNG(img: HTMLImageElement, canvas: HTMLCanvasElement) {
   } else {
     alert('Nothing to save!')
   }
+}
+
+export function canvasToPng(img: HTMLImageElement, canvas: HTMLCanvasElement) {
+  let heatCanvas = document.createElement('canvas')
+  heatCanvas.width = img.width
+  heatCanvas.height = img.height
+  let heatCanvasContext = heatCanvas.getContext('2d')
+  console.log('img', img, 'canvas', canvas)
+  heatCanvasContext.drawImage(img, 0, 0)
+  heatCanvasContext.drawImage(canvas, 0, 0)
+  return heatCanvas.toDataURL('image/png')
 }

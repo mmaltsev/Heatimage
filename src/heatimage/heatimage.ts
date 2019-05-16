@@ -1,4 +1,4 @@
-import { saveAsJSON, saveAsPNG } from './exporting'
+import { canvasToPng, saveAsJSON, saveAsPNG } from './exporting'
 import { applyStyles, canvasWrapperStyle, menuExpandedInnerHTML,
   menuExpandedStyle, menuInnerHTML, menuStyle } from './outline'
 import * as simpleheat from './simpleheat.js'
@@ -20,13 +20,10 @@ export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
     let { heatValue, colorGradient, heatRadius, heatBlur, exporting,
       edit, keys, defaultData} = heatOptions
     value = heatValue
-    // Waiting for image to load, checking every 0.1 sec.
-    let interval = setInterval(() => {
-      if (img.complete) {
-        clearInterval(interval)
-        onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit, defaultData)
-      }
-    }, 100)
+    while (!img.complete) {
+      setTimeout(() => {}, 100)
+    }
+    onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit, defaultData)
 
     if (edit) {
       document.addEventListener('mousedown', mouseDown)
@@ -36,9 +33,17 @@ export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
         document.onkeydown = keyPress
       }
     }
+    return exportHeatimage(img)
   } else {
     console.error('Heatimage Error: No image specified')
   }
+  return undefined
+}
+
+function exportHeatimage(img) {
+  let exportImg = document.createElement('img')
+  exportImg.src = canvasToPng(img, canvas)
+  return exportImg
 }
 
 function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradientNames, heatRadius: number,
@@ -67,6 +72,7 @@ function generateCanvas(img: HTMLImageElement, edit: boolean) {
   canvas.height = img.height
   canvas.style.cursor = edit ? 'crosshair' : 'default'
   img.style.userSelect = 'none'
+  console.log('return canvasWrapper')
   return canvasWrapper
 }
 
