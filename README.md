@@ -4,9 +4,6 @@
 
 Draw heat over static images or simply visualize existing datasets.
 
-
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-
 ## [Demo](https://mmaltsev.github.io/Heatimage/examples/demo)
 
 ## Installation
