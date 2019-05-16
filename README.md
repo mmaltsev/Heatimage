@@ -4,10 +4,7 @@
 
 Draw heat over static images or simply visualize existing datasets.
 
-
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-
-## [Demo](https://mmaltsev.github.io/Heatimage/examples/demo) | [Docs]()
+## [Demo](https://mmaltsev.github.io/Heatimage/examples/demo)
 
 ## Installation
 
@@ -82,6 +79,3 @@ Build the library with `npm run build`. For a production version with console wa
 
 ## License
 MIT License. Copyright (c) 2017-2019 Maxim Maltsev.
-
-## Authors
-[Maxim Maltsev](https://github.com/mmaltsev).
