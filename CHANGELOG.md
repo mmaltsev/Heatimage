@@ -1,5 +1,6 @@
 ## 0.1.2
 - Fixed bug with image loading.
+- Added displayCanvas property to heatOptions.
 
 ## 0.1.1
 - Implemented exporting of the image with overlay of default heat data.
