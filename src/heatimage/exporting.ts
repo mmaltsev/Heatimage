@@ -35,7 +35,6 @@ export function canvasToPng(img: HTMLImageElement, canvas: HTMLCanvasElement) {
   heatCanvas.width = img.width
   heatCanvas.height = img.height
   let heatCanvasContext = heatCanvas.getContext('2d')
-  console.log('img', img, 'canvas', canvas)
   heatCanvasContext.drawImage(img, 0, 0)
   heatCanvasContext.drawImage(canvas, 0, 0)
   return heatCanvas.toDataURL('image/png')

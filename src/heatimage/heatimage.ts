@@ -20,11 +20,6 @@ export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
     let { heatValue, colorGradient, heatRadius, heatBlur, exporting,
       edit, keys, defaultData} = heatOptions
     value = heatValue
-    while (!img.complete) {
-      setTimeout(() => {}, 100)
-    }
-    onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit, defaultData)
-
     if (edit) {
       document.addEventListener('mousedown', mouseDown)
       document.addEventListener('mouseup', mouseUp)
@@ -33,11 +28,19 @@ export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
         document.onkeydown = keyPress
       }
     }
+    onImageLoad(img, colorGradient, heatRadius, heatBlur, exporting, edit, defaultData)
     return exportHeatimage(img)
   } else {
     console.error('Heatimage Error: No image specified')
   }
   return undefined
+}
+
+function isImageLoaded(img) {
+  if (img.complete && img.naturalWidth !== 0) {
+    return true
+  }
+  return false
 }
 
 function exportHeatimage(img) {
@@ -72,7 +75,6 @@ function generateCanvas(img: HTMLImageElement, edit: boolean) {
   canvas.height = img.height
   canvas.style.cursor = edit ? 'crosshair' : 'default'
   img.style.userSelect = 'none'
-  console.log('return canvasWrapper')
   return canvasWrapper
 }
 
