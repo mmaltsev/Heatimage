@@ -37,13 +37,6 @@ export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
   return undefined
 }
 
-function isImageLoaded(img) {
-  if (img.complete && img.naturalWidth !== 0) {
-    return true
-  }
-  return false
-}
-
 function exportHeatimage(img) {
   let exportImg = document.createElement('img')
   exportImg.src = canvasToPng(img, canvas)
