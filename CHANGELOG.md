@@ -1,3 +1,7 @@
+## 0.1.3
+- Code refactoring.
+- Added new color palettes as default gradients.
+
 ## 0.1.2
 - Fixed bug with image loading.
 - Added displayCanvas property to heatOptions.
