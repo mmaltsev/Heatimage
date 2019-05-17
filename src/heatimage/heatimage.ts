@@ -1,8 +1,9 @@
 import { canvasToPng, saveAsJSON, saveAsPNG } from './exporting'
 import { applyStyles, canvasWrapperStyle, menuExpandedInnerHTML,
   menuExpandedStyle, menuInnerHTML, menuStyle } from './outline'
+import { gradientPalettes } from './palettes'
 import * as simpleheat from './simpleheat.js'
-import { ColorGradientNames, HeatData, HeatOptions, Simpleheat } from './types'
+import { ColorGradientName, HeatData, HeatOptions, Simpleheat } from './types'
 
 // Global variables.
 let isDraw: boolean
@@ -17,7 +18,7 @@ let lastMoves: number[] = []
 export function heatimage(img: HTMLImageElement, heatOptions: HeatOptions) {
   // Catching missing of image reference.
   if (img) {
-    let { heatValue, colorGradient, heatRadius, heatBlur, exporting,
+    let { heatValue, heatRadius, heatBlur, colorGradient, exporting,
       edit, keys, displayCanvas, defaultData} = heatOptions
     value = heatValue
     if (edit) {
@@ -43,12 +44,12 @@ function exportHeatimage(img) {
   return exportImg
 }
 
-function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradientNames, heatRadius: number,
+function onImageLoad(img: HTMLImageElement, colorGradient: ColorGradientName, heatRadius: number,
   heatBlur: number, exporting: boolean, edit: boolean, displayCanvas: boolean,
   defaultData: HeatData[]) {
   let canvasWrapper = generateCanvas(img, edit, displayCanvas)
   // Initializing simpleheat object.
-  heat = simpleheat(canvas, colorGradient)
+  heat = simpleheat(canvas, gradientPalettes, colorGradient)
   heat.radius(heatRadius, heatBlur)
   if (defaultData) {
     data = heatDataValues(defaultData)

@@ -27,8 +27,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 if (typeof module !== 'undefined') module.exports = simpleheat;
 
-function simpleheat(canvas, defaultGradientName) {
-    if (!(this instanceof simpleheat)) return new simpleheat(canvas, defaultGradientName);
+function simpleheat(canvas, defaultGradients, defaultGradientName) {
+    if (!(this instanceof simpleheat)) return new simpleheat(canvas, defaultGradients, defaultGradientName);
 
     this._canvas = canvas = typeof canvas === 'string' ? document.getElementById(canvas) : canvas;
 
@@ -38,87 +38,13 @@ function simpleheat(canvas, defaultGradientName) {
 
     this._max = 1;
     this._data = [];
+    this._defaultGradients = defaultGradients;
     this._defaultGradientName = defaultGradientName;
 }
 
 simpleheat.prototype = {
 
     defaultRadius: 25,
-
-    defaultGradientName: 'Dark Green',
-
-    defaultGradients: {
-        // Many of the palettes listed bellow were extracted from
-        // https://docs.microsoft.com/en-us/bingmaps/v8-web-control/map-control-concepts/heat-map-module-examples/heat-map-color-gradients
-        'Black Aqua White': {
-            0: 'Black',
-            0.5: 'Aqua',
-            1: 'White'
-        },
-        'Blue Red': {
-            0.0: 'blue',
-            1: 'red'
-        },
-        'Dark Green': {
-            0.1: '#ecf7ee',
-            0.2: '#b9dec0',
-            0.4: '#b9dec0',
-            0.5: '#64a171',
-            0.6: '#437e4f',
-            0.7: '#275731',
-            0.8: '#102c16',
-            1.0: '#000000',
-        },
-        'Deep Sea': {
-            0.0: 'rgb(0, 0, 0)',
-            0.6: 'rgb(24, 53, 103)',
-            0.75: 'rgb(46, 100, 158)',
-            0.9: 'rgb(23, 173, 203)',
-            1.0: 'rgb(0, 250, 250)'
-        },
-        'Color Spectrum': {
-            0: 'Navy',
-            0.25: 'Blue',
-            0.5: 'Green',
-            0.75: 'Yellow',
-            1: 'Red'
-        },
-        'Incandescent': {
-            0: 'Black',
-            0.33: 'DarkRed',
-            0.66: 'Yellow',
-            1: 'White'
-        },
-        'Heated Metal': {
-            0: 'Black',
-            0.4: 'Purple',
-            0.6: 'Red',
-            0.8: 'Yellow',
-            1: 'White'
-        },
-        'Sunrise': {
-            0: 'Red',
-            0.66: 'Yellow',
-            1: 'White'
-        },
-        'Stepped Colors': {
-            0: 'Navy',
-            0.25: 'Navy',
-            0.26: 'Green',
-            0.5: 'Green',
-            0.51: 'Yellow',
-            0.75: 'Yellow',
-            0.76: 'Red',
-            1: 'Red'
-        },
-        'Visible Spectrum': {
-            0.00: 'rgb(255,0,255)',
-            0.25: 'rgb(0,0,255)',
-            0.50: 'rgb(0,255,0)',
-            0.75: 'rgb(255,255,0)',
-            1.00: 'rgb(255,0,0)'
-        }
-    },
 
     data: function (data) {
         this._data = data;
@@ -190,7 +116,7 @@ simpleheat.prototype = {
 
     draw: function (minOpacity) {
         if (!this._circle) this.radius(this.defaultRadius);
-        if (!this._grad) this.gradient(this.defaultGradients[this._defaultGradientName]);
+        if (!this._grad) this.gradient(this._defaultGradients[this._defaultGradientName]);
 
         var ctx = this._ctx;
 
