@@ -1,3 +1,6 @@
+## 0.1.4
+- Fixed bug with canvas styling.
+
 ## 0.1.3
 - Code refactoring.
 - Added new color palettes as default gradients.
