@@ -30,13 +30,13 @@ export const gradientPalettes = {
     1.0: 'rgb(0, 250, 250)'
   },
   'ColorBrewer Blues': {
-    0.0: '#ebf0ff',
-    0.2: '#bad2eb',
-    0.4: '#8ebeda',
+    0.0: '#0b3281',
+    0.2: '#1c5ba6',
+    0.4: '#357eb9',
     0.5: '#5a9ecc',
-    0.6: '#357eb9',
-    0.8: '#1c5ba6',
-    1.0: '#0b3281'
+    0.6: '#8ebeda',
+    0.8: '#bad2eb',
+    1.0: '#ebf0ff'
   },
   'Color Spectrum': {
     0: 'Navy',
@@ -53,12 +53,12 @@ export const gradientPalettes = {
   },
   'Heat': {
     0.0: '#dbe2af',
-    0.2: '#edd96e',
-    0.4: '#f3bf5e',
+    0.2: '#a93e3c',
+    0.4: '#cf7047',
     0.5: '#e89b53',
-    0.6: '#cf7047',
-    0.8: '#a93e3c',
-    1.0: '#7a002d'
+    0.6: '#f3bf5e',
+    0.8: '#edd96e',
+    1.0: '#dbe2af'
   },
   'Heated Metal': {
     0: 'Black',
@@ -83,13 +83,13 @@ export const gradientPalettes = {
     1: 'Red'
   },
   'Viridis': {
-    0.0: '#fce51e',
-    0.2: '#7fd335',
-    0.4: '#2fac66',
+    0.0: '#340042',
+    0.2: '#342870',
+    0.4: '#26547b',
     0.5: '#1f7f79',
-    0.6: '#26547b',
-    0.8: '#342870',
-    1.0: '#340042'
+    0.6: '#2fac66',
+    0.8: '#7fd335',
+    1.0: '#fce51e'
   },
   'Visible Spectrum': {
     0.00: 'rgb(255,0,255)',
