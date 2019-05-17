@@ -1,10 +1,10 @@
 export function canvasWrapperStyle(img) {
   return {
     display: 'block',
-    marginTop: '' + -img.height,
+    marginTop: -img.height + 'px',
     position: 'relative',
-    width: '' + img.width,
-    height: '' + img.height
+    width: img.width + 'px',
+    height: img.height + 'px'
   }
 }
 
